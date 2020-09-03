@@ -1,8 +1,8 @@
 package dev.binclub.bincode.parsing.attributes
 
+import dev.binclub.bincode.*
 import dev.binclub.bincode.BingaitParser.LOGGER
 import dev.binclub.bincode.parsing.attributes.AttributeSource.CODE
-import dev.binclub.bincode.s2
 import dev.binclub.bincode.types.ClassVersion
 import dev.binclub.bincode.types.attributes.types.code.CodeAttribute
 import dev.binclub.bincode.types.attributes.types.code.Opcode
@@ -13,9 +13,6 @@ import dev.binclub.bincode.types.constantpool.ConstantPool
 import dev.binclub.bincode.types.constantpool.ConstantPoolReference
 import dev.binclub.bincode.types.constantpool.constants.ClassConstant
 import dev.binclub.bincode.types.constantpool.constants.Utf8Constant
-import dev.binclub.bincode.u1
-import dev.binclub.bincode.u2
-import dev.binclub.bincode.u4
 import dev.binclub.bincode.utils.toHex
 import java.io.DataInput
 import java.util.*
@@ -106,6 +103,11 @@ object CodeParser: SpecificAttributeParser<CodeAttribute>("Code") {
 				IF_ACMPEQ, IF_ACMPNE, GOTO, JSR, IFNULL, IFNONNULL -> {
 					offset += 3
 					val jumpOffset = dataInput.s2()
+					JumpInsn(opcode, jumpOffset)
+				}
+				GOTO_W, JSR_W -> {
+					offset += 5
+					val jumpOffset = dataInput.u4()
 					JumpInsn(opcode, jumpOffset)
 				}
 				else -> {
