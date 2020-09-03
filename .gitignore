@@ -1,0 +1,5 @@
+.gradle/
+.idea/*
+!idea/codeStyles
+build/
+out/
