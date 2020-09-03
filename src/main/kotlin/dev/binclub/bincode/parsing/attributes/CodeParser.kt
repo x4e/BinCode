@@ -2,6 +2,7 @@ package dev.binclub.bincode.parsing.attributes
 
 import dev.binclub.bincode.BingaitParser.LOGGER
 import dev.binclub.bincode.parsing.attributes.AttributeSource.CODE
+import dev.binclub.bincode.s2
 import dev.binclub.bincode.types.ClassVersion
 import dev.binclub.bincode.types.attributes.types.code.CodeAttribute
 import dev.binclub.bincode.types.attributes.types.code.Opcode
@@ -15,6 +16,7 @@ import dev.binclub.bincode.types.constantpool.constants.Utf8Constant
 import dev.binclub.bincode.u1
 import dev.binclub.bincode.u2
 import dev.binclub.bincode.u4
+import dev.binclub.bincode.utils.toHex
 import java.io.DataInput
 import java.util.*
 
@@ -55,7 +57,8 @@ object CodeParser: SpecificAttributeParser<CodeAttribute>("Code") {
 		
 		var offset = 0
 		while (offset < codeLength) {
-			val opcode = Opcode.opcodeOf(dataInput.u1())
+			val opInt = dataInput.u1()
+			val opcode = Opcode.maybeOpcodeOf(opInt)
 			val _offset = offset
 			
 			insns[_offset] = when (opcode) {
@@ -99,9 +102,16 @@ object CodeParser: SpecificAttributeParser<CodeAttribute>("Code") {
 					offset += 3
 					LdcInsn(opcode, ConstantPoolReference(dataInput.u2()))
 				}
+				IFEQ, IFNE, IFLT, IFGE, IFLE, IF_ICMPEQ, IF_ICMPNE, IF_ICMPLT, IF_ICMPGE, IF_ICMPGT, IF_ICMPLE,
+				IF_ACMPEQ, IF_ACMPNE, GOTO, JSR, IFNULL, IFNONNULL -> {
+					offset += 3
+					val jumpOffset = dataInput.s2()
+					JumpInsn(opcode, jumpOffset)
+				}
 				else -> {
+					// Maybe we should hard crash?
 					offset += 1
-					LOGGER.warning("Unknown opcode $opcode")
+					LOGGER.warning("Unknown opcode ${opcode ?: opInt.toHex()}")
 					Insn(INVALID)
 				}
 			}

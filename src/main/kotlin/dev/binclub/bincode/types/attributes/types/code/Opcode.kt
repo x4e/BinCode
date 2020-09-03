@@ -214,16 +214,16 @@ enum class Opcode(open val num: Int) {
 	
 	companion object {
 		private val cachedValues = values()
-		
-		fun opcodeOf(opcode: Int): Opcode {
-			// TODO: caching maybe?
-			for (enumConstant in cachedValues) {
-				if (enumConstant.num == opcode) {
-					return enumConstant
-				}
+		private val map = HashMap<Int, Opcode>(cachedValues.size).also {
+			cachedValues.forEach { op ->
+				it[op.num] = op
 			}
-			throw IllegalArgumentException("Invalid Opcode 0x${opcode.toString(16)}")
 		}
+		
+		fun maybeOpcodeOf(opcode: Int): Opcode? = map[opcode]
+		
+		fun opcodeOf(opcode: Int): Opcode
+			= map[opcode] ?: throw IllegalArgumentException("Invalid Opcode ${opcode.toHex()}")
 	}
 	
 	override fun toString(): String {

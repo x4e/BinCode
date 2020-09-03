@@ -18,22 +18,23 @@ class ParsingTest1 {
 	fun test1() {
 		val bytes = BingaitParser::class.java.getResourceAsStream("/parsing/ExampleClass1.class").readBytes()
 		val classFile = BingaitParser(DataInputStream(ByteArrayInputStream(bytes)))
+		println(classFile.toString())
 		assertEquals(expected, classFile.toString())
 	}
 	
 	val expected = """ClassFile(
 	constantPool=[
 		#0: 	[Empty Constant Index]
-		#1: 	MethodRef: (Class: CP#6, NameAndType: CP#40)
-		#2: 	FieldRef: (Clazz: CP#5, NameAndType: CP#41)
-		#3: 	FieldRef: (Clazz: CP#5, NameAndType: CP#42)
-		#4: 	MethodRef: (Class: CP#5, NameAndType: CP#43)
-		#5: 	ClassConstant: CP#44
-		#6: 	ClassConstant: CP#45
-		#7: 	ClassConstant: CP#46
+		#1: 	MethodRef: (Class: CP#6, NameAndType: CP#41)
+		#2: 	FieldRef: (Clazz: CP#5, NameAndType: CP#42)
+		#3: 	FieldRef: (Clazz: CP#5, NameAndType: CP#43)
+		#4: 	MethodRef: (Class: CP#5, NameAndType: CP#44)
+		#5: 	ClassConstant: CP#45
+		#6: 	ClassConstant: CP#46
+		#7: 	ClassConstant: CP#47
 		#8: 	Utf8: Other
 		#9: 	Utf8: InnerClasses
-		#10: 	ClassConstant: CP#47
+		#10: 	ClassConstant: CP#48
 		#11: 	Utf8: Idk
 		#12: 	Utf8: a
 		#13: 	Utf8: I
@@ -57,20 +58,21 @@ class ParsingTest1 {
 		#31: 	Utf8: this
 		#32: 	Utf8: Lparsing/ExampleClass1;
 		#33: 	Utf8: thing
-		#34: 	Utf8: SourceFile
-		#35: 	Utf8: ExampleClass1.java
-		#36: 	Utf8: Deprecated
-		#37: 	Utf8: RuntimeVisibleAnnotations
-		#38: 	Utf8: Ljava/lang/Deprecated;
-		#39: 	Utf8: hello hello goodbye
-		#40: 	NameAndType: (Name: CP#26, Descriptor: CP#27)
-		#41: 	NameAndType: (Name: CP#12, Descriptor: CP#13)
-		#42: 	NameAndType: (Name: CP#14, Descriptor: CP#13)
-		#43: 	NameAndType: (Name: CP#33, Descriptor: CP#27)
-		#44: 	Utf8: parsing/ExampleClass1
-		#45: 	Utf8: java/lang/Object
-		#46: 	Utf8: parsing/ExampleClass1${"$"}Other
-		#47: 	Utf8: parsing/ExampleClass1${"$"}Idk],
+		#34: 	Utf8: StackMapTable
+		#35: 	Utf8: SourceFile
+		#36: 	Utf8: ExampleClass1.java
+		#37: 	Utf8: Deprecated
+		#38: 	Utf8: RuntimeVisibleAnnotations
+		#39: 	Utf8: Ljava/lang/Deprecated;
+		#40: 	Utf8: hello hello goodbye
+		#41: 	NameAndType: (Name: CP#26, Descriptor: CP#27)
+		#42: 	NameAndType: (Name: CP#12, Descriptor: CP#13)
+		#43: 	NameAndType: (Name: CP#14, Descriptor: CP#13)
+		#44: 	NameAndType: (Name: CP#33, Descriptor: CP#27)
+		#45: 	Utf8: parsing/ExampleClass1
+		#46: 	Utf8: java/lang/Object
+		#47: 	Utf8: parsing/ExampleClass1${"$"}Other
+		#48: 	Utf8: parsing/ExampleClass1${"$"}Idk],
 	access=super public
 	thisClass=CP#5,
 	superClass=CP#6,
@@ -174,17 +176,13 @@ class ParsingTest1 {
 				instructions=[
 				   ALOAD_0
 					INVOKEVIRTUAL(CP#4)
-					RETURN
+					GOTO(-4)
 				],
 				tryCatchBlocks=[],
 				attributes=[LineNumberTableAttribute(
 					lineNumbers=[
 						LineNumber(
 							start=0,
-							lineNumber=15
-						),
-						LineNumber(
-							start=4,
 							lineNumber=16
 						)
 						]
@@ -192,36 +190,36 @@ class ParsingTest1 {
 					variables=[
 						LocalVariable(
 							start=0,
-							length=5,
+							length=7,
 							nameRef=CP#31,
 							descriptorRef=CP#32,
 							index=0
 						)
 						]
-				)],
+				), UnknownAttribute(StackMapTable)],
 			)]
 		)
 		],
 	attributes=[
-		SourceFileAttribute(CP#35),
-		DeprecatedAttribute(CP#36),
+		SourceFileAttribute(CP#36),
+		DeprecatedAttribute(CP#37),
 		RuntimeVisibleAnnotationsAttribute(
 			annotations=[
 				Annotation(
-				   type=CP#38
+				   type=CP#39
 					pairs=[]
 				),
 				Annotation(
 				   type=CP#21
 					pairs=[
-						(CP#22, ConstantAnnotationValue(CP#39))
+						(CP#22, ConstantAnnotationValue(CP#40))
 						]
 				)
 				]
 		),
 		InnerClassesAttribute([
-				InnerClassInfo(innerClassInfoIndex=CP#7, outerClassInfoIndex=CP#5, innerNameIndex=CP#8, innerClassAccessFlags=interface abstract annotation static public),
-				InnerClassInfo(innerClassInfoIndex=CP#10, outerClassInfoIndex=CP#5, innerNameIndex=CP#11, innerClassAccessFlags=interface abstract annotation static public)
+				InnerClassInfo(innerClassInfoIndex=CP#7, outerClassInfoIndex=CP#5, innerNameIndex=CP#8, innerClassAccessFlags=static abstract interface annotation public),
+				InnerClassInfo(innerClassInfoIndex=CP#10, outerClassInfoIndex=CP#5, innerNameIndex=CP#11, innerClassAccessFlags=static abstract interface annotation public)
 			])
 		]
 )""".trimIndent()

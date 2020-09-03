@@ -12,7 +12,9 @@ public class ExampleClass1 {
     private final int b = 3;
 
     void thing() {
-        thing();
+        while (true) {
+            thing();
+        }
     }
 
     public @interface Idk {

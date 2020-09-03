@@ -66,3 +66,12 @@ data class VarInsn(
 		""".trimMargin()
 }
 
+data class JumpInsn(
+	override val opcode: Opcode,
+	val offset: Int
+): Insn(opcode) {
+	override fun toString(): String = """
+		|$opcode($offset)
+		""".trimMargin()
+}
+
