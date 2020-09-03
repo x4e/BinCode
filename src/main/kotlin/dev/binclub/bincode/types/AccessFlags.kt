@@ -5,6 +5,7 @@ import dev.binclub.bincode.types.Access.Companion.fieldAccesses
 import dev.binclub.bincode.types.Access.Companion.innerClassAccesses
 import dev.binclub.bincode.types.Access.Companion.methodAccesses
 import dev.binclub.bincode.utils.asMutable
+import java.util.*
 
 enum class Access(
 	val flags: Int,
@@ -57,7 +58,7 @@ data class AccessFlags(
 		fun parseInnerClass(access: Int): AccessFlags = AccessFlags(collectAccesses(innerClassAccesses, access))
 		
 		private fun collectAccesses(options: Array<Access>, access: Int): MutableSet<Access> = options
-			.filterTo(HashSet()) { access and it.flags != 0 }
+			.filterTo(TreeSet()) { access and it.flags != 0 }
 	}
 	
 	fun backToInt(): Int {
