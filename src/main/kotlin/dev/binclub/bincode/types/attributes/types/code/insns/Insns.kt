@@ -14,6 +14,10 @@ import dev.binclub.bincode.types.constantpool.constants.Utf8Constant
 open class Insn(
 	open val opcode: Opcode
 ) {
+	/// Size in bytes
+	open val size: Int
+		get() = 1
+	
 	override fun toString(): String = """
 		|$opcode
 		""".trimMargin()
@@ -23,6 +27,9 @@ data class FieldInsn(
 	override val opcode: Opcode,
 	val fieldRef: ConstantPoolReference<FieldRefConstant>
 ): Insn(opcode) {
+	override val size: Int
+		get() = super.size + 2 // 16bit cp ref
+	
 	override fun toString(): String = """
 		|$opcode($fieldRef)
 		""".trimMargin()
@@ -74,4 +81,7 @@ data class JumpInsn(
 		|$opcode($offset)
 		""".trimMargin()
 }
+
+
+
 

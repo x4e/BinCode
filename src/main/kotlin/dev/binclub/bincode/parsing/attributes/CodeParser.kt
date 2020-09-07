@@ -13,8 +13,9 @@ import dev.binclub.bincode.types.constantpool.ConstantPool
 import dev.binclub.bincode.types.constantpool.ConstantPoolReference
 import dev.binclub.bincode.types.constantpool.constants.ClassConstant
 import dev.binclub.bincode.types.constantpool.constants.Utf8Constant
+import dev.binclub.bincode.utils.cast
 import dev.binclub.bincode.utils.toHex
-import java.io.DataInput
+import java.io.*
 import java.util.*
 
 object CodeParser: SpecificAttributeParser<CodeAttribute>("Code") {
@@ -109,6 +110,55 @@ object CodeParser: SpecificAttributeParser<CodeAttribute>("Code") {
 					offset += 5
 					val jumpOffset = dataInput.u4()
 					JumpInsn(opcode, jumpOffset)
+				}
+				TABLESWITCH -> {
+					val stream = dataInput.cast<FilterInputStream>()
+					val f = FilterInputStream::class.java.getDeclaredField("in").let {
+						it.isAccessible = true
+						it.get(stream).cast<ByteArrayInputStream>()
+					}
+					val pos = ByteArrayInputStream::class.java.getDeclaredField("pos").also {
+						it.isAccessible = true
+					}
+					val start = (offset to pos.get(f) as Int)
+					
+					offset += 1
+					// <0-3 byte pad>
+					val padding = offset.rem(4)
+					offset += padding + 12 // + 3 x 32bit integers
+					dataInput.skip(padding)
+					
+					val df = dataInput.u4()
+					val low = dataInput.u4()
+					val high = dataInput.u4()
+					
+					// Maybe check low <= high
+					
+					val numOffsets = high - low + 1
+					offset += numOffsets * 4 // each offset is 1 32bit integer
+					val offsets = IntArray(numOffsets) {
+						dataInput.u4()
+					}
+					println(pos.get(f) as Int - start.second)
+					println(offset - start.first)
+					TableSwitchInsn(opcode, df, low, high, offsets)
+				}
+				LOOKUPSWITCH -> {
+					offset += 1
+					// <0-3 byte pad>
+					val padding = offset.rem(4)
+					offset += padding + 8 // + 2 x 32bit integers
+					dataInput.skip(padding)
+					
+					val df = dataInput.u4()
+					val nPairs = dataInput.u4()
+					offset += nPairs * 8 // each offset is 2 32bit integers
+					val pairs: MutableMap<Int, Int> = HashMap(nPairs)
+					for (i in 0 until nPairs) {
+						pairs[dataInput.u4()] = dataInput.u4()
+					}
+					
+					LookupSwitchInsn(opcode, df, pairs)
 				}
 				else -> {
 					// Maybe we should hard crash?
