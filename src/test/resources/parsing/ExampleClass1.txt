@@ -1,0 +1,240 @@
+ClassFile(
+	constantPool=[
+		#0: 	[Empty Constant Index]
+		#1: 	MethodRef: (Class: CP#10, NameAndType: CP#46)
+		#2: 	FieldRef: (Clazz: CP#9, NameAndType: CP#47)
+		#3: 	FieldRef: (Clazz: CP#9, NameAndType: CP#48)
+		#4: 	Double: 0.0102
+		#5: 	[Empty Constant Index]
+		#6: 	Double: 1000.0
+		#7: 	[Empty Constant Index]
+		#8: 	MethodRef: (Class: CP#9, NameAndType: CP#49)
+		#9: 	ClassConstant: CP#50
+		#10: 	ClassConstant: CP#51
+		#11: 	ClassConstant: CP#52
+		#12: 	Utf8: Other
+		#13: 	Utf8: InnerClasses
+		#14: 	ClassConstant: CP#53
+		#15: 	Utf8: Idk
+		#16: 	Utf8: a
+		#17: 	Utf8: I
+		#18: 	Utf8: b
+		#19: 	Utf8: ConstantValue
+		#20: 	Integer: 3
+		#21: 	Utf8: RuntimeInvisibleAnnotations
+		#22: 	Utf8: Lparsing/ExampleClass1$Idk;
+		#23: 	Utf8: Lparsing/ExampleClass1$Other;
+		#24: 	Integer: 2
+		#25: 	Utf8: Lkotlin/Deprecated;
+		#26: 	Utf8: message
+		#27: 	Utf8: msg2
+		#28: 	Utf8: c
+		#29: 	Utf8: msg
+		#30: 	Utf8: <init>
+		#31: 	Utf8: ()V
+		#32: 	Utf8: Code
+		#33: 	Utf8: LineNumberTable
+		#34: 	Utf8: LocalVariableTable
+		#35: 	Utf8: this
+		#36: 	Utf8: Lparsing/ExampleClass1;
+		#37: 	Utf8: thing
+		#38: 	Utf8: D
+		#39: 	Utf8: StackMapTable
+		#40: 	Utf8: SourceFile
+		#41: 	Utf8: ExampleClass1.java
+		#42: 	Utf8: Deprecated
+		#43: 	Utf8: RuntimeVisibleAnnotations
+		#44: 	Utf8: Ljava/lang/Deprecated;
+		#45: 	Utf8: hello hello goodbye
+		#46: 	NameAndType: (Name: CP#30, Descriptor: CP#31)
+		#47: 	NameAndType: (Name: CP#16, Descriptor: CP#17)
+		#48: 	NameAndType: (Name: CP#18, Descriptor: CP#17)
+		#49: 	NameAndType: (Name: CP#37, Descriptor: CP#31)
+		#50: 	Utf8: parsing/ExampleClass1
+		#51: 	Utf8: java/lang/Object
+		#52: 	Utf8: parsing/ExampleClass1$Other
+		#53: 	Utf8: parsing/ExampleClass1$Idk],
+	access=public super
+	thisClass=CP#9,
+	superClass=CP#10,
+	interfaces=[],
+	fields=[
+		Field(
+			accessFlags=,
+			name=CP#16,
+			descriptor=CP#17,
+			attributes=[]
+		),
+		Field(
+			accessFlags=private final,
+			name=CP#18,
+			descriptor=CP#17,
+			attributes=[ConstantValueAttribute(CP#20), RuntimeInvisibleAnnotationsAttribute(
+				annotations=[
+					Annotation(
+					   type=CP#22
+						pairs=[
+							(CP#16, ConstantAnnotationValue(CP#16)),
+							(CP#18, InnerAnnotationAnnotationValue(Annotation(
+							   type=CP#23
+								pairs=[
+									(CP#16, ConstantAnnotationValue(CP#24)),
+									(CP#18, InnerAnnotationAnnotationValue(Annotation(
+									   type=CP#25
+										pairs=[
+											(CP#26, ConstantAnnotationValue(CP#27))
+											]
+									)))
+									]
+							))),
+							(CP#28, InnerAnnotationAnnotationValue(Annotation(
+							   type=CP#25
+								pairs=[
+									(CP#26, ConstantAnnotationValue(CP#29))
+									]
+							)))
+							]
+					)
+					]
+			)]
+		)
+		],
+	methods=[
+		Method(
+			accessFlags=public,
+			name=CP#30,
+			descriptor=CP#31,
+			attributes=[CodeAttribute(
+				maxStack=2,
+				maxLocals=1,
+				instructions=[
+				   ALOAD_0
+					INVOKESPECIAL(CP#1)
+					ALOAD_0
+					ICONST_2
+					PUTFIELD(CP#2)
+					ALOAD_0
+					ICONST_3
+					PUTFIELD(CP#3)
+					RETURN
+				],
+				tryCatchBlocks=[],
+				attributes=[LineNumberTableAttribute(
+					lineNumbers=[
+						LineNumber(
+							start=0,
+							lineNumber=8
+						),
+						LineNumber(
+							start=4,
+							lineNumber=9
+						),
+						LineNumber(
+							start=9,
+							lineNumber=11
+						)
+						]
+				), LocalVariableTableAttribute(
+					variables=[
+						LocalVariable(
+							start=0,
+							length=15,
+							nameRef=CP#35,
+							descriptorRef=CP#36,
+							index=0
+						)
+						]
+				)],
+			)]
+		),
+		Method(
+			accessFlags=,
+			name=CP#37,
+			descriptor=CP#31,
+			attributes=[CodeAttribute(
+				maxStack=4,
+				maxLocals=4,
+				instructions=[
+				   ICONST_0
+					ISTORE_1
+					LDC2_W(CP#4)
+					DSTORE_2
+					DLOAD_2
+					LDC2_W(CP#6)
+					DADD
+					DSTORE_2
+					ALOAD_0
+					INVOKEVIRTUAL(CP#8)
+					GOTO(-10)
+				],
+				tryCatchBlocks=[],
+				attributes=[LineNumberTableAttribute(
+					lineNumbers=[
+						LineNumber(
+							start=0,
+							lineNumber=15
+						),
+						LineNumber(
+							start=2,
+							lineNumber=29
+						),
+						LineNumber(
+							start=6,
+							lineNumber=31
+						),
+						LineNumber(
+							start=12,
+							lineNumber=32
+						)
+						]
+				), LocalVariableTableAttribute(
+					variables=[
+						LocalVariable(
+							start=0,
+							length=19,
+							nameRef=CP#35,
+							descriptorRef=CP#36,
+							index=0
+						),
+						LocalVariable(
+							start=2,
+							length=17,
+							nameRef=CP#16,
+							descriptorRef=CP#17,
+							index=1
+						),
+						LocalVariable(
+							start=6,
+							length=13,
+							nameRef=CP#18,
+							descriptorRef=CP#38,
+							index=2
+						)
+						]
+				), UnknownAttribute(StackMapTable)],
+			)]
+		)
+		],
+	attributes=[
+		SourceFileAttribute(CP#41),
+		DeprecatedAttribute(CP#42),
+		RuntimeVisibleAnnotationsAttribute(
+			annotations=[
+				Annotation(
+				   type=CP#44
+					pairs=[]
+				),
+				Annotation(
+				   type=CP#25
+					pairs=[
+						(CP#26, ConstantAnnotationValue(CP#45))
+						]
+				)
+				]
+		),
+		InnerClassesAttribute([
+				InnerClassInfo(innerClassInfoIndex=CP#11, outerClassInfoIndex=CP#9, innerNameIndex=CP#12, innerClassAccessFlags=public static interface abstract annotation),
+				InnerClassInfo(innerClassInfoIndex=CP#14, outerClassInfoIndex=CP#9, innerNameIndex=CP#15, innerClassAccessFlags=public static interface abstract annotation)
+			])
+		]
+)

@@ -15,8 +15,9 @@ class ParsingTest1 {
 		val bytes = ParsingTest1::class.java.getResourceAsStream("/parsing/ExampleClass1.class").readBytes()
 		val classFile = Bincode(DataInputStream(ByteArrayInputStream(bytes)))
 		println(classFile.toString())
-		//val expected = ParsingTest1::class.java.getResourceAsStream("/parsing/ExampleClass1.txt").readBytes().toString(Charsets.UTF_8)
-		assertEquals("expected", classFile.toString())
+		val expected = ParsingTest1::class.java.getResourceAsStream("/parsing/ExampleClass1.txt")
+			.readBytes().toString(Charsets.UTF_8)
+		assertEquals(expected.trim(), classFile.toString().trim())
 	}
 }
 
