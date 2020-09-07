@@ -1,13 +1,9 @@
 package parsing
 
-import dev.binclub.bincode.BingaitParser
+import dev.binclub.bincode.Bincode
 import org.junit.jupiter.api.Test
 import java.io.ByteArrayInputStream
-import java.io.DataInput
 import java.io.DataInputStream
-import java.io.File
-import java.time.Duration
-import java.time.Instant
 import kotlin.test.*
 
 /**
@@ -17,7 +13,7 @@ class ParsingTest1 {
 	@Test
 	fun test1() {
 		val bytes = ParsingTest1::class.java.getResourceAsStream("/parsing/ExampleClass1.class").readBytes()
-		val classFile = BingaitParser(DataInputStream(ByteArrayInputStream(bytes)))
+		val classFile = Bincode(DataInputStream(ByteArrayInputStream(bytes)))
 		println(classFile.toString())
 		//val expected = ParsingTest1::class.java.getResourceAsStream("/parsing/ExampleClass1.txt").readBytes().toString(Charsets.UTF_8)
 		assertEquals("expected", classFile.toString())

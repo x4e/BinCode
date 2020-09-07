@@ -6,7 +6,7 @@ import java.io.*
 import java.util.jar.JarFile
 import java.util.logging.Logger
 
-object BingaitParser {
+object Bincode {
 	val LOGGER: Logger = Logger.getLogger("BinCode")
 	
 	operator fun invoke(file: File) = parse(file)

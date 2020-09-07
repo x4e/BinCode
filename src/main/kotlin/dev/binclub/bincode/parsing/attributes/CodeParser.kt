@@ -1,7 +1,7 @@
 package dev.binclub.bincode.parsing.attributes
 
 import dev.binclub.bincode.*
-import dev.binclub.bincode.BingaitParser.LOGGER
+import dev.binclub.bincode.Bincode.LOGGER
 import dev.binclub.bincode.parsing.attributes.AttributeSource.CODE
 import dev.binclub.bincode.types.ClassVersion
 import dev.binclub.bincode.types.attributes.types.code.CodeAttribute
