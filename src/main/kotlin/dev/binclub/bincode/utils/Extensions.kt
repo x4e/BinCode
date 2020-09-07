@@ -101,25 +101,4 @@ fun String.escapeString(): String = buildString (this.length) {
 inline fun Int.toHex(): String = "0x${toString(16)}"
 inline fun Long.toHex(): String = "0x${toString(16)}"
 
-fun File.classPathProvider(): (String) -> DataInput? {
-	val dir = when {
-		this.isDirectory -> this
-		this.isFile -> this.parentFile
-		else -> error("$this is not a directory or file")
-	}
-	return { resource ->
-		val withoutPath = File(dir, resource.substringAfterLast(File.pathSeparatorChar))
-		val withPath = File(dir, resource)
-		when {
-			withoutPath.exists() -> {
-				RandomAccessFile(withoutPath, "r")
-			}
-			withPath.exists() -> {
-				RandomAccessFile(withPath, "r")
-			}
-			else -> null
-		}
-	}
-}
-
 inline fun <reified T: Any> Any?.cast(): T = this as T

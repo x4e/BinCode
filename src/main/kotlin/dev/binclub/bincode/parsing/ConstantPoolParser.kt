@@ -52,7 +52,7 @@ object ConstantPoolParser {
 		}
 	}
 	
-	private class InvalidConstant(val message: String? = null): Constant() {
+	class InvalidConstant(val message: String? = null): Constant() {
 		override fun toString(): String = message ?: "[Empty Constant Index]"
 	}
 	

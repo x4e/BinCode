@@ -5,9 +5,9 @@ import dev.binclub.bincode.types.constantpool.ConstantPoolReference
 
 data class InvokeDynamicConstant(
 	val bootstrapMethodIndex: Int,
-	val nameAndTypeIndex: ConstantPoolReference<NameAndTypeConstant>
+	val nameAndType: ConstantPoolReference<NameAndTypeConstant>
 ): Constant() {
 	// TODO: bootstrapMethod fetching from BootstrapMethodTable
 	override fun toString(): String =
-			"(InvokeDynamic: (BootstrapMethod: $bootstrapMethodIndex, NameAndType: $nameAndTypeIndex)"
+			"(InvokeDynamic: (BootstrapMethod: $bootstrapMethodIndex, NameAndType: $nameAndType)"
 }
