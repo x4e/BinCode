@@ -23,9 +23,10 @@ object ConstantPoolParser {
 			constantPool[index] = parseConstant(constantPool, dataInput)
 			if (constantPool[index].isDoubleSize()) {
 				// Double size constants take up two indexes
-				constantPool[index++] = invalid
+				index += 1
+				constantPool[index] = invalid
 			}
-			index++
+			index += 1
 		}
 		
 		return constantPool
