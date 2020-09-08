@@ -112,16 +112,6 @@ object CodeParser: SpecificAttributeParser<CodeAttribute>("Code") {
 					JumpInsn(opcode, jumpOffset)
 				}
 				TABLESWITCH -> {
-					val stream = dataInput.cast<FilterInputStream>()
-					val f = FilterInputStream::class.java.getDeclaredField("in").let {
-						it.isAccessible = true
-						it.get(stream).cast<ByteArrayInputStream>()
-					}
-					val pos = ByteArrayInputStream::class.java.getDeclaredField("pos").also {
-						it.isAccessible = true
-					}
-					val start = (offset to pos.get(f) as Int)
-					
 					offset += 1
 					// <0-3 byte pad>
 					val padding = offset.rem(4)
@@ -139,8 +129,6 @@ object CodeParser: SpecificAttributeParser<CodeAttribute>("Code") {
 					val offsets = IntArray(numOffsets) {
 						dataInput.u4()
 					}
-					println(pos.get(f) as Int - start.second)
-					println(offset - start.first)
 					TableSwitchInsn(opcode, df, low, high, offsets)
 				}
 				LOOKUPSWITCH -> {
