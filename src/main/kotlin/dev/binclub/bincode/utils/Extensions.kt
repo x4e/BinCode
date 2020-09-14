@@ -1,3 +1,5 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package dev.binclub.bincode.utils
 
 import java.io.DataInput
@@ -98,7 +100,7 @@ fun String.escapeString(): String = buildString (this.length) {
 	}
 }
 
-inline fun Int.toHex(): String = "0x${toString(16)}"
-inline fun Long.toHex(): String = "0x${toString(16)}"
+inline fun Int.toHex(): String = "0x${Integer.toHexString(this)}"
+inline fun Long.toHex(): String = "0x${java.lang.Long.toHexString(this)}"
 
 inline fun <reified T: Any> Any?.cast(): T = this as T
