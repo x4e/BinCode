@@ -57,8 +57,15 @@ data class AccessFlags(
 		fun parseMethod(access: Int): AccessFlags = AccessFlags(collectAccesses(methodAccesses, access))
 		fun parseInnerClass(access: Int): AccessFlags = AccessFlags(collectAccesses(innerClassAccesses, access))
 		
-		private fun collectAccesses(options: Array<Access>, access: Int): MutableSet<Access> = options
-			.filterTo(TreeSet()) { access and it.flags != 0 }
+		private fun collectAccesses(options: Array<Access>, access: Int): MutableSet<Access> {
+			val set = EnumSet.noneOf(Access::class.java)
+			options.forEach { option ->
+				if (access and option.flags != 0) {
+					set += option
+				}
+			}
+			return set
+		}
 	}
 	
 	fun backToInt(): Int {
