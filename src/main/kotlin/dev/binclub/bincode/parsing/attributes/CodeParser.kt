@@ -105,9 +105,13 @@ object CodeParser: SpecificAttributeParser<CodeAttribute>("Code") {
 					offset += 3
 					LdcInsn(opcode, ConstantPoolReference(dataInput.u2()))
 				}
+				SIPUSH -> {
+					offset += 3
+					IntInsn(opcode, dataInput.s2())
+				}
 				BIPUSH -> {
 					offset += 2
-					IntInsn(opcode, dataInput.u1())
+					IntInsn(opcode, dataInput.s1())
 				}
 				IFEQ, IFNE, IFLT, IFGE, IFLE, IF_ICMPEQ, IF_ICMPNE, IF_ICMPLT, IF_ICMPGE, IF_ICMPGT, IF_ICMPLE,
 				IF_ACMPEQ, IF_ACMPNE, GOTO, JSR, IFNULL, IFNONNULL -> {
