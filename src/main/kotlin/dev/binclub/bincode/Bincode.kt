@@ -18,7 +18,7 @@ object Bincode {
 			file.extension == "class" -> {
 				arrayOf(parse(RandomAccessFile(file, "r")))
 			}
-			file.extension == "jar" -> {
+			file.extension == "jar" || file.extension == "zip" -> {
 				JarFile(file).use { jar ->
 					val out = ArrayList<ClassFile>(jar.size())
 					jar.entries().iterator().forEach { entry ->
