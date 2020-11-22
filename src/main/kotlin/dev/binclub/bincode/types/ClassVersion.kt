@@ -1,3 +1,5 @@
+@file:Suppress("MemberVisibilityCanBePrivate", "unused")
+
 package dev.binclub.bincode.types
 
 /**
@@ -33,6 +35,7 @@ data class ClassVersion(val minor: Int, val major: Int) {
 		val V12 = ClassVersion(0, 0x38)
 		val V13 = ClassVersion(0, 0x39)
 		val V14 = ClassVersion(0, 0x3A)
+		val V15 = ClassVersion(0, 0x3B)
 		
 		val names = hashMapOf(
 			V1_1.major to "1.1",
@@ -48,7 +51,8 @@ data class ClassVersion(val minor: Int, val major: Int) {
 			V11.major to "11",
 			V12.major to "12",
 			V13.major to "13",
-			V14.major to "14"
+			V14.major to "14",
+			V15.major to "15"
 		)
 	}
 }
