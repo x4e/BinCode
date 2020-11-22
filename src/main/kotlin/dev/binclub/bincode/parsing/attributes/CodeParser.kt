@@ -155,7 +155,7 @@ object CodeParser: SpecificAttributeParser<CodeAttribute>("Code") {
 				}
 				else -> {
 					// Maybe we should hard crash?
-					offset += 1
+					offset += 1 // assume one byte instruction
 					LOGGER.warning("Unknown opcode ${opcode ?: opInt.toHex()}")
 					Insn(INVALID)
 				}

@@ -19,9 +19,7 @@ open class Insn(
 	open val size: Int
 		get() = 1
 	
-	override fun toString(): String = """
-		|$opcode
-		""".trimMargin()
+	override fun toString(): String = if (opcode == INVALID) "Invalid" else "Insn($opcode)"
 }
 
 data class FieldInsn(
