@@ -54,6 +54,15 @@ data class LdcInsn(
 		""".trimMargin()
 }
 
+data class IntInsn(
+	override val opcode: Opcode,
+	val value: Int
+): Insn(opcode) {
+	override fun toString(): String = """
+		|$opcode($value)
+		""".trimMargin()
+}
+
 data class ReferenceInsn(
 	override val opcode: Opcode,
 	val typeConstant: ConstantPoolReference<Utf8Constant> // Fully qualified internal name reference
