@@ -91,6 +91,7 @@ object CodeParser: SpecificAttributeParser<CodeAttribute>("Code") {
 				INVOKEINTERFACE -> {
 					offset += 5
 					val methodIndex = dataInput.u2()
+					dataInput.u1() // count (useless)
 					InvokeInsn(opcode, ConstantPoolReference(methodIndex))
 				}
 				ANEWARRAY, NEW -> {
