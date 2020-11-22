@@ -5,6 +5,7 @@ import dev.binclub.bincode.types.attributes.types.code.Opcode.*
 import dev.binclub.bincode.types.constantpool.Constant
 import dev.binclub.bincode.types.constantpool.ConstantPoolReference
 import dev.binclub.bincode.types.constantpool.constants.FieldRefConstant
+import dev.binclub.bincode.types.constantpool.constants.MethodConstant
 import dev.binclub.bincode.types.constantpool.constants.MethodRefConstant
 import dev.binclub.bincode.types.constantpool.constants.Utf8Constant
 
@@ -37,7 +38,7 @@ data class FieldInsn(
 
 data class InvokeInsn(
 	override val opcode: Opcode,
-	val methodRef: ConstantPoolReference<MethodRefConstant>
+	val methodRef: ConstantPoolReference<MethodConstant>
 ): Insn(opcode) {
 	override fun toString(): String = """
 		|$opcode($methodRef)

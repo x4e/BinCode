@@ -88,6 +88,11 @@ object CodeParser: SpecificAttributeParser<CodeAttribute>("Code") {
 					offset += 3
 					InvokeInsn(opcode, ConstantPoolReference(dataInput.u2()))
 				}
+				INVOKEINTERFACE -> {
+					offset += 5
+					val methodIndex = dataInput.u2()
+					InvokeInsn(opcode, ConstantPoolReference(methodIndex))
+				}
 				ANEWARRAY, NEW -> {
 					offset += 3
 					ReferenceInsn(opcode, ConstantPoolReference(dataInput.u2()))
