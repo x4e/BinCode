@@ -20,7 +20,7 @@ object ConstantPoolParser {
 		
 		var index = 1
 		while (index < size) {
-			constantPool[index] = parseConstant(constantPool, dataInput)
+			constantPool[index] = parseConstant(constantPool, dataInput, index)
 			if (constantPool[index].isDoubleSize()) {
 				// Double size constants take up two indexes
 				index += 1
@@ -32,7 +32,7 @@ object ConstantPoolParser {
 		return constantPool
 	}
 	
-	private fun parseConstant(constantPool: ConstantPool, dataInput: DataInput): Constant {
+	private fun parseConstant(constantPool: ConstantPool, dataInput: DataInput, index: Int): Constant {
 		return when (val tag = dataInput.u1()) {
 			7 -> ClassConstant(getCPRef(dataInput))
 			9 -> FieldRefConstant(getCPRef(dataInput), getCPRef(dataInput))
@@ -48,12 +48,13 @@ object ConstantPoolParser {
 			15 -> MethodHandleConstant(dataInput.u1(), getCPRef(dataInput))
 			16 -> MethodTypeConstant(getCPRef(dataInput))
 			18 -> InvokeDynamicConstant(dataInput.u2(), getCPRef(dataInput))
-			else -> InvalidConstant("Invalid Constant Tag $tag")
+			19 -> ModuleConstant(getCPRef(dataInput))
+			20 -> PackageConstant(getCPRef(dataInput))
+			else -> {
+				System.err.println("Warning: Invalid constant tag $tag in constant pool at index $index")
+				InvalidConstant("Invalid Constant Tag $tag")
+			}
 		}
-	}
-	
-	class InvalidConstant(val message: String? = null): Constant() {
-		override fun toString(): String = message ?: "[Empty Constant Index]"
 	}
 	
 	private fun <T: Constant> getCPRef(dataInput: DataInput) = ConstantPoolReference<T>(dataInput.u2())
