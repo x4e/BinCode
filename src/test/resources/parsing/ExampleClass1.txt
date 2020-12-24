@@ -108,15 +108,15 @@ ClassFile(
 				maxStack=2,
 				maxLocals=1,
 				instructions=[
-				   ALOAD_0
+				   Insn(ALOAD_0)
 					INVOKESPECIAL(CP#1)
-					ALOAD_0
-					ICONST_2
+					Insn(ALOAD_0)
+					Insn(ICONST_2)
 					PUTFIELD(CP#2)
-					ALOAD_0
-					ICONST_3
+					Insn(ALOAD_0)
+					Insn(ICONST_3)
 					PUTFIELD(CP#3)
-					RETURN
+					Insn(RETURN)
 				],
 				tryCatchBlocks=[],
 				attributes=[LineNumberTableAttribute(
@@ -155,15 +155,15 @@ ClassFile(
 				maxStack=4,
 				maxLocals=4,
 				instructions=[
-				   ICONST_0
-					ISTORE_1
+				   Insn(ICONST_0)
+					Insn(ISTORE_1)
 					LDC2_W(CP#4)
-					DSTORE_2
-					DLOAD_2
+					Insn(DSTORE_2)
+					Insn(DLOAD_2)
 					LDC2_W(CP#6)
-					DADD
-					DSTORE_2
-					ALOAD_0
+					Insn(DADD)
+					Insn(DSTORE_2)
+					Insn(ALOAD_0)
 					INVOKEVIRTUAL(CP#8)
 					GOTO(-10)
 				],
