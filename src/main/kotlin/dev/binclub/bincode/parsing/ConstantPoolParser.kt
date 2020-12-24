@@ -8,9 +8,14 @@ import dev.binclub.bincode.types.constantpool.constants.*
 import java.io.DataInput
 import java.io.DataInputStream
 
+@Suppress("MemberVisibilityCanBePrivate")
 object ConstantPoolParser {
 	fun parse(dataInput: DataInput): ConstantPool {
 		val size = dataInput.u2()
+		return parse(dataInput, size)
+	}
+	
+	fun parse(dataInput: DataInput, size: Int): ConstantPool {
 		val invalid = InvalidConstant()
 		val constantPool = ConstantPool(size, invalid)
 		

@@ -16,12 +16,16 @@ object FieldsParser {
 	fun parseFields(version: ClassVersion, dataInput: DataInput, constantPool: ConstantPool): Array<Field> {
 		val numFields = dataInput.u2()
 		return Array(numFields) {
-			Field(
-				AccessFlags.parseField(dataInput.u2()),
-				ConstantPoolReference(dataInput.u2()),
-				ConstantPoolReference(dataInput.u2()),
-				AttributeParser.parseAttributes(FIELD, version, dataInput, constantPool)
-			)
+			parseField(version, dataInput, constantPool)
 		}
+	}
+	
+	fun parseField(version: ClassVersion, dataInput: DataInput, constantPool: ConstantPool): Field {
+		return Field(
+			AccessFlags.parseField(dataInput.u2()),
+			ConstantPoolReference(dataInput.u2()),
+			ConstantPoolReference(dataInput.u2()),
+			AttributeParser.parseAttributes(FIELD, version, dataInput, constantPool)
+		)
 	}
 }
