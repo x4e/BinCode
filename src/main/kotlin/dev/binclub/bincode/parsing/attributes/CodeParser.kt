@@ -128,7 +128,7 @@ object CodeParser: SpecificAttributeParser<CodeAttribute>("Code") {
 				TABLESWITCH -> {
 					offset += 1
 					// <0-3 byte pad>
-					val padding = offset.rem(4)
+					val padding = 3 - offset.rem(4)
 					offset += padding + 12 // + 3 x 32bit integers
 					dataInput.skip(padding)
 					
@@ -148,7 +148,7 @@ object CodeParser: SpecificAttributeParser<CodeAttribute>("Code") {
 				LOOKUPSWITCH -> {
 					offset += 1
 					// <0-3 byte pad>
-					val padding = offset.rem(4)
+					val padding = 3 - offset.rem(4)
 					offset += padding + 8 // + 2 x 32bit integers
 					dataInput.skip(padding)
 					
