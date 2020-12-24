@@ -18,19 +18,9 @@ object ClassFileParser {
 	 */
 	@Throws(InvalidClassMagicException::class, ClassParseException::class)
 	fun parse(dataInput: DataInput): ClassFile {
-		val magic = dataInput.u4()
-		if (magic != CLASS_MAGIC) {
-			throw InvalidClassMagicException("Invalid magic ${magic.toHex()}, expected ${CLASS_MAGIC.toHex()}")
-		}
-		val classFile = ClassFile()
+		val classFile = parseClassHeader(dataInput)
 		
 		try {
-			classFile.version = ClassVersion(dataInput.u2(), dataInput.u2())
-			classFile.constantPool = ConstantPoolParser.parse(dataInput)
-			classFile.access = AccessFlags.parseClass(dataInput.u2())
-			classFile.thisClass = ConstantPoolReference(dataInput.u2())
-			classFile.superClass = ConstantPoolReference(dataInput.u2())
-			classFile.interfaces = InterfaceParser.parseInterfaces(dataInput)
 			classFile.fields = FieldsParser.parseFields(classFile.version, dataInput, classFile.constantPool)
 			classFile.methods = MethodParser.parseMethods(classFile.version, dataInput, classFile.constantPool)
 			classFile.attributes = AttributeParser.parseAttributes(CLASS, classFile.version, dataInput, classFile.constantPool)
