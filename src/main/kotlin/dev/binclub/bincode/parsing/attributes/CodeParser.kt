@@ -19,10 +19,10 @@ import java.io.*
 import java.util.*
 
 object CodeParser: SpecificAttributeParser<CodeAttribute>("Code") {
-	override fun canParse(source: AttributeSource, version: ClassVersion) =
-		(source == AttributeSource.METHOD) && version.isAtLeast(ClassVersion.V5)
+	override fun canParse(source: AttributeSource, version: ClassVersion?) =
+		(source == AttributeSource.METHOD) && version?.isAtLeast(ClassVersion.V5) ?: true
 	
-	override fun parse(source: AttributeSource, version: ClassVersion, nameRef: ConstantPoolReference<Utf8Constant>, dataInput: DataInput, constantPool: ConstantPool): CodeAttribute {
+	override fun parse(source: AttributeSource, version: ClassVersion?, nameRef: ConstantPoolReference<Utf8Constant>, dataInput: DataInput, constantPool: ConstantPool): CodeAttribute {
 		val maxStack = dataInput.u2()
 		val maxLocals = dataInput.u2()
 		

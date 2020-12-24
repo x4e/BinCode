@@ -56,7 +56,7 @@ object AttributeParser {
 		val name = nameRef[constantPool].value
 		val parser = attributeParsers[name]
 		return if (parser != null && parser.canParse(source, version)) {
-			parser.parse(source, nameRef, dataInput, constantPool)
+			parser.parse(source, version, nameRef, dataInput, constantPool)
 		} else {
 			dataInput.skip(length)
 			UnknownAttribute(name, nameRef, length)
