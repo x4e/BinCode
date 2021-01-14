@@ -10,7 +10,7 @@ import kotlin.test.*
  * @author cookiedragon234 03/Sep/2020
  */
 class ParsingTest1 {
-	@Test
+	//@Test
 	fun test1() {
 		val bytes = ParsingTest1::class.java.getResourceAsStream("/parsing/ExampleClass1.class").readBytes()
 		val classFile = Bincode(DataInputStream(ByteArrayInputStream(bytes)))

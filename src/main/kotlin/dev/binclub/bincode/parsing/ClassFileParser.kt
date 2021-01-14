@@ -25,8 +25,8 @@ object ClassFileParser {
 			classFile.methods = MethodParser.parseMethods(classFile.version, dataInput, classFile.constantPool)
 			classFile.attributes = AttributeParser.parseAttributes(CLASS, classFile.version, dataInput, classFile.constantPool)
 		} catch (t: Throwable) {
-			val version = try { classFile.version } catch (t: Throwable) { null } ?.toString() ?: "unknown"
-			val className = try { classFile.thisClass[classFile.constantPool].nameRef[classFile.constantPool].value } catch (t: Throwable) { null } ?: "unknown"
+			val version = try { classFile.version.toString() } catch (t: Throwable) { "unknown" }
+			val className = try { classFile.thisClass[classFile].nameRef[classFile].value } catch (t: Throwable) { "unknown" }
 			throw ClassParseException("Couldn't parse class [$className] of version [$version]", t)
 		}
 		
@@ -52,8 +52,8 @@ object ClassFileParser {
 			classFile.superClass = ConstantPoolReference(dataInput.u2())
 			classFile.interfaces = InterfaceParser.parseInterfaces(dataInput)
 		} catch (t: Throwable) {
-			val version = try { classFile.version } catch (t: Throwable) { null } ?.toString() ?: "unknown"
-			val className = try { classFile.thisClass[classFile.constantPool].nameRef[classFile.constantPool].value } catch (t: Throwable) { null } ?: "unknown"
+			val version = try { classFile.version.toString() } catch (t: Throwable) { "unknown" }
+			val className = try { classFile.thisClass[classFile.constantPool].nameRef[classFile.constantPool].value } catch (t: Throwable) { "unknown" }
 			throw ClassParseException("Couldn't parse class [$className] of version [$version]", t)
 		}
 		

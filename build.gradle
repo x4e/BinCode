@@ -33,3 +33,10 @@ compileKotlin {
         freeCompilerArgs = ["-Xinline-classes"]
     }
 }
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget= 1.8
+    kotlinOptions {
+        freeCompilerArgs = ["-Xinline-classes"]
+    }
+}

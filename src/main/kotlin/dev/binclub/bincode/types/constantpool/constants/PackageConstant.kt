@@ -6,7 +6,7 @@ import dev.binclub.bincode.types.constantpool.ConstantPoolReference
 /**
  * @author cook 22/Nov/2020
  */
-class PackageConstant(
+data class PackageConstant(
 	val nameIndex: ConstantPoolReference<Utf8Constant>
 ): Constant() {
 	override fun toString(): String =

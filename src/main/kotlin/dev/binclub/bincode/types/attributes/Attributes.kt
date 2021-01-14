@@ -109,7 +109,7 @@ data class ConstantValueAttribute(
 	operator fun get(constantPool: ConstantPool): Any {
 		val constant = constantPool[constantIndex.index]
 		if (constant is StringConstant) {
-			return constant.getValue(constantPool)
+			return constant.stringRef[constantPool].value
 		}
 		constant as PrimitiveConstant<*>
 		return constant.value

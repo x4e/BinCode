@@ -7,6 +7,6 @@ data class DoubleConstant(
 ): PrimitiveConstant<Double>() {
 	override fun isDoubleSize(): Boolean = true
 	override fun toString(): String =
-			"Double: $value"
+		"Double: $value"
 }
 

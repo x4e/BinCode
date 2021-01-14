@@ -8,5 +8,5 @@ data class NameAndTypeConstant(
 	val descriptorIndex: ConstantPoolReference<Utf8Constant>
 ): Constant() {
 	override fun toString(): String =
-			"NameAndType: (Name: $nameIndex, Descriptor: $descriptorIndex)"
+		"NameAndType: (Name: $nameIndex, Descriptor: $descriptorIndex)"
 }

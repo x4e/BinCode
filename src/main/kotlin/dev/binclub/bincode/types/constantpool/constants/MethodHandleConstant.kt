@@ -8,5 +8,5 @@ data class MethodHandleConstant(
 	val referenceRef: ConstantPoolReference<Constant>
 ): Constant() {
 	override fun toString(): String =
-			"MethodHandle: (Kind: $referenceKind, Ref: $referenceRef)"
+		"MethodHandle: (Kind: $referenceKind, Ref: $referenceRef)"
 }

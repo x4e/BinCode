@@ -8,5 +8,5 @@ data class FieldRefConstant(
 	val nameAndTypeRef: ConstantPoolReference<NameAndTypeConstant>
 ): Constant() {
 	override fun toString(): String =
-			"FieldRef: (Clazz: $classRef, NameAndType: $nameAndTypeRef)"
+		"FieldRef: (Clazz: $classRef, NameAndType: $nameAndTypeRef)"
 }

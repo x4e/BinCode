@@ -7,5 +7,5 @@ data class MethodTypeConstant(
 	val descriptorIndex: ConstantPoolReference<Utf8Constant>
 ): Constant() {
 	override fun toString(): String =
-			"MethodType: #$descriptorIndex"
+		"MethodType: #$descriptorIndex"
 }
