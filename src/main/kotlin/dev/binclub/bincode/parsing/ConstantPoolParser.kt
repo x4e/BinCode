@@ -54,10 +54,7 @@ object ConstantPoolParser {
 			18 -> InvokeDynamicConstant(dataInput.u2(), getCPRef(dataInput))
 			19 -> ModuleConstant(getCPRef(dataInput))
 			20 -> PackageConstant(getCPRef(dataInput))
-			else -> {
-				System.err.println("Warning: Invalid constant tag $tag in constant pool at index $index")
-				InvalidConstant("Invalid Constant Tag $tag")
-			}
+			else -> throw ClassParseException("Invalid Constant Tag $tag")
 		}
 	}
 	
